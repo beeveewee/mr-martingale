@@ -119,9 +119,12 @@ def load_data():
     ind['sma14'] = c4c.rolling(14).mean().values
     ind['high_20d'] = c4h.rolling(120).max().values
 
-    # RSI variants (on hlcc4)
+    # RSI variants (on hlcc4) — for entry indicators
     for period in [7, 10, 14, 21]:
         ind[f'rsi_{period}'] = compute_rsi(hlcc4, period).values
+
+    # RSI on close — for rescue filter (matches v2.9 implementation)
+    ind['rsi_close_14'] = compute_rsi(c4c, 14).values
 
     # Stochastic RSI variants
     for rsi_l in [4, 7, 11, 14]:
