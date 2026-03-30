@@ -1,10 +1,11 @@
 """
-Mr Martingale — dual-sided (LONG + SHORT) main loop.
+Mr Martingale v3.0 — dual-sided (LONG + SHORT) main loop.
 
-Long grid:  opens when BTC price is 0.5%+ below both EMA34 & SMA14
-Short grid: opens when BTC price is 2.5%+ above both EMA34 & SMA14
+Long grid:  v28 gate (0.5%+ below EMA34 & SMA14) OR ema20 gate (2.0%+ below EMA20)
+            + SMA440 regime filter + dd20d filter + RSI rescue
+Short grid: 8.0%+ above both EMA34 & SMA14
 
-Runtime safety model (v1.2.0):
+Runtime safety model:
 - One active side at a time (long OR short)
 - Exchange-truth order checks (no "missing order == fill" inference)
 - Startup reconciliation against exchange state
